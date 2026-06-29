@@ -1,0 +1,241 @@
+/* ============================================
+   Signup.css — Zerodha-inspired signup design
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  background-color: #f8f8f8;
+}
+
+/* ─── Page Wrapper ─────────────────────────── */
+.signup-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  padding: 20px;
+}
+
+/* ─── Card ─────────────────────────────────── */
+.signup-card {
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.09);
+  padding: 44px 52px;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ─── Logo ─────────────────────────────────── */
+.signup-logo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.signup-logo img {
+  height: 30px;
+  object-fit: contain;
+}
+
+/* ─── Heading ──────────────────────────────── */
+.signup-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.signup-subtitle {
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* ─── Error Banner ─────────────────────────── */
+.signup-error {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  color: #cf1322;
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ─── Success Banner ───────────────────────── */
+.signup-success {
+  background-color: #f6ffed;
+  border: 1px solid #b7eb8f;
+  color: #389e0d;
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ─── Form Groups ──────────────────────────── */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.form-group input::placeholder {
+  color: #bbb;
+  font-size: 13px;
+}
+
+.form-group input:focus {
+  border-color: #387ed1;
+  box-shadow: 0 0 0 3px rgba(56, 126, 209, 0.12);
+}
+
+.form-group input:disabled {
+  background-color: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Password strength hint */
+.form-group .hint {
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+/* ─── Submit Button ────────────────────────── */
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #387ed1;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  margin-top: 6px;
+}
+
+.signup-btn:hover:not(:disabled) {
+  background-color: #2e6bb5;
+}
+
+.signup-btn:active:not(:disabled) {
+  background-color: #255a9e;
+}
+
+.signup-btn:disabled {
+  background-color: #a8c8ee;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* ─── Footer Links ─────────────────────────── */
+.signup-footer {
+  text-align: center;
+  margin-top: 26px;
+}
+
+.signup-footer p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.signup-footer p:last-child {
+  margin-bottom: 0;
+}
+
+.signup-footer a {
+  color: #387ed1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.signup-footer a:hover {
+  color: #2e6bb5;
+  text-decoration: underline;
+}
+
+/* ─── Terms note (optional) ────────────────── */
+.signup-terms {
+  font-size: 11px;
+  color: #aaa;
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+.signup-terms a {
+  color: #888;
+  text-decoration: underline;
+}
+
+/* ─── Divider (optional) ───────────────────── */
+.signup-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: #ccc;
+  font-size: 12px;
+}
+
+.signup-divider::before,
+.signup-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+/* ─── Responsive ───────────────────────────── */
+@media (max-width: 480px) {
+  .signup-card {
+    padding: 32px 22px;
+    box-shadow: none;
+    border: 1px solid #e8e8e8;
+  }
+
+  .signup-title {
+    font-size: 20px;
+  }
+}

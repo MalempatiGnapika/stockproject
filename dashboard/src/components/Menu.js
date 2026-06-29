@@ -80,7 +80,7 @@ const Menu = () => {
           <li>
             <Link
               style={{ textDecoration: "none" }}
-              to="/apps"
+              to="/"
               onClick={() => handleMenuClick(6)}
             >
               <p className={selectedMenu === 6 ? activeMenuClass : menuClass}>
@@ -88,6 +88,17 @@ const Menu = () => {
               </p>
             </Link>
           </li>
+          <li>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/ai-assistant"
+              onClick={() => handleMenuClick(7)}
+            >
+              <p className={selectedMenu === 7 ? activeMenuClass : menuClass}>
+                AI Assistant
+              </p>
+            </Link>
+         </li>  
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>

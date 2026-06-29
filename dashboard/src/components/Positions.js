@@ -1,8 +1,24 @@
-import React from "react";
-
-import { positions } from "../data/data";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Positions = () => {
+  const [positions, setPositions] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("http://localhost:3002/allPositions", {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setPositions(res.data);
+      })
+      .catch((err) => {
+        console.error("Positions fetch error:", err.response?.status);
+      });
+  }, []);
+     
   return (
     <>
       <h3 className="title">Positions ({positions.length})</h3>

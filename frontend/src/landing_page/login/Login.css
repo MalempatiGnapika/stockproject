@@ -1,0 +1,217 @@
+/* ============================================
+   Login.css — Zerodha-inspired login design
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  background-color: #f8f8f8;
+}
+
+/* ─── Page Wrapper ─────────────────────────── */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  padding: 20px;
+}
+
+/* ─── Card ─────────────────────────────────── */
+.login-card {
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.09);
+  padding: 44px 52px;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ─── Logo ─────────────────────────────────── */
+.login-logo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.login-logo img {
+  height: 30px;
+  object-fit: contain;
+}
+
+/* ─── Heading ──────────────────────────────── */
+.login-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.login-subtitle {
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* ─── Error Banner ─────────────────────────── */
+.login-error {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  color: #cf1322;
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ─── Form Groups ──────────────────────────── */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.form-group input::placeholder {
+  color: #bbb;
+  font-size: 13px;
+}
+
+.form-group input:focus {
+  border-color: #387ed1;
+  box-shadow: 0 0 0 3px rgba(56, 126, 209, 0.12);
+}
+
+.form-group input:disabled {
+  background-color: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+/* ─── Submit Button ────────────────────────── */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #387ed1;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  margin-top: 6px;
+}
+
+.login-btn:hover:not(:disabled) {
+  background-color: #2e6bb5;
+}
+
+.login-btn:active:not(:disabled) {
+  background-color: #255a9e;
+}
+
+.login-btn:disabled {
+  background-color: #a8c8ee;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* ─── Footer Links ─────────────────────────── */
+.login-footer {
+  text-align: center;
+  margin-top: 26px;
+}
+
+.login-footer p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.login-footer p:last-child {
+  margin-bottom: 0;
+}
+
+.login-footer a {
+  color: #387ed1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.login-footer a:hover {
+  color: #2e6bb5;
+  text-decoration: underline;
+}
+
+.forgot-link {
+  font-size: 12px !important;
+  color: #aaa !important;
+  font-weight: 400 !important;
+}
+
+.forgot-link:hover {
+  color: #888 !important;
+}
+
+/* ─── Divider (optional) ───────────────────── */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: #ccc;
+  font-size: 12px;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+/* ─── Responsive ───────────────────────────── */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 22px;
+    box-shadow: none;
+    border: 1px solid #e8e8e8;
+  }
+
+  .login-title {
+    font-size: 20px;
+  }
+}

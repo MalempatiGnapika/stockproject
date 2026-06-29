@@ -1,84 +1,172 @@
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./Signup.css";
+
+// ✅ Must match your backend PORT in backend/.env
+const API_BASE = "http://localhost:3002";
 
 function Signup() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const handleSignup = async () => {
-  try {
-    const res = await axios.post("http://localhost:3002/signup", {
-      email,
-      username,
-      password,
-    });
 
-    alert(res.data.message);
-    window.location.href = "http://localhost:3001";
-  }  catch (err) {
-  console.log("Error:", err);
-  console.log("Response:", err.response);
-  console.log("Data:", err.response?.data);
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
 
-  alert(JSON.stringify(err.response?.data));
-}
-};
-//   const handleSignup = async () => {
-//   try {
-//     const res = await axios.post("http://localhost:3002/signup", {
-//       email,
-//       username,
-//       password,
-//     });
+    // Client-side validation
+    if (!name.trim() || !email.trim() || !password || !confirmPassword) {
+      setError("All fields are required.");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
 
-//     alert(res.data);
-//     window.location.href = "http://localhost:3004";
-//   } catch (err) {
-//   console.log(err.response);
-//   alert(JSON.stringify(err.response?.data));
-// }
-// };
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        `${API_BASE}/signup`,
+        {
+          name: name.trim(),
+          email: email.trim(),
+          password,
+        },
+        {
+          withCredentials: true, // ✅ Required for cookies
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (response.data.success) {
+        // Store token for dashboard auth
+        setSuccess("Account created! Redirecting to dashboard...");
+        setTimeout(() => {
+          window.location.href = `http://localhost:3001?token=${response.data.token}`;
+        }, 1000);
+      }
+    } catch (err) {
+      if (err.response) {
+        setError(err.response.data.message || "Signup failed. Please try again.");
+      } else if (err.request) {
+        setError("Cannot connect to server. Make sure the backend is running on port 3002.");
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div>
-      <h1>Signup</h1>
+    <div className="signup-container">
+      <div className="signup-card">
+        <div className="signup-logo">
+          <img
+            src="/media/images/logo.svg"
+            alt="Zerodha"
+            style={{ height: "28px" }}
+            onError={(e) => { e.target.style.display = "none"; }}
+          />
+        </div>
 
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+        <h2 className="signup-title">Create Account</h2>
+        <p className="signup-subtitle">
+          Join millions of investors on the platform.
+        </p>
 
-      <br /><br />
+        {error && (
+          <div className="signup-error" role="alert">
+            {error}
+          </div>
+        )}
+        {success && (
+          <div className="signup-success" role="status">
+            {success}
+          </div>
+        )}
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <form onSubmit={handleSignup} noValidate>
+          <div className="form-group">
+            <label htmlFor="name">Full Name</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Enter your full name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
 
-      <br /><br />
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+              disabled={loading}
+            />
+          </div>
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="At least 6 characters"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="new-password"
+              disabled={loading}
+            />
+          </div>
 
-      <br /><br />
-        <button onClick={handleSignup}>Signup</button>
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              id="confirmPassword"
+              type="password"
+              placeholder="Re-enter your password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              autoComplete="new-password"
+              disabled={loading}
+            />
+          </div>
 
-<button
-  onClick={() => navigate("/login")}
-  style={{ marginLeft: "10px" }}
->
-  Login
-</button>
+          <button type="submit" className="signup-btn" disabled={loading}>
+            {loading ? "Creating account..." : "Sign Up"}
+          </button>
+        </form>
+
+        <div className="signup-footer">
+          <p>
+            Already have an account?{" "}
+            <Link to="/login">Login</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
